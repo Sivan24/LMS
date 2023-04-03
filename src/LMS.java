@@ -9,6 +9,7 @@ public class LMS {
 
         while (true) {
             System.out.println();
+            System.out.println("Welcome to the Library Management System (supported by Sivan)");
             System.out.println("1. Add book");
             System.out.println("2. Delete book");
             System.out.println("3. List books");
@@ -45,7 +46,7 @@ public class LMS {
                     findBook(scanner);
                     break;
                 case 0:
-                    System.out.println("Goodbye!");
+                    System.out.println("Thank you for using, goodbye!");
                     System.exit(0);
                 default:
                     System.out.println("Invalid choice!");

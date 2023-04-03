@@ -191,6 +191,7 @@ public class BookList {
 
     private void loadFromFile() {
         File file = new File(filePath);
+
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
@@ -209,6 +210,7 @@ public class BookList {
 
     private void saveToFile() {
         File file = new File(filePath);
+
         try (PrintWriter writer = new PrintWriter(file)) {
             BookNode current = head;
             while (current != null) {
