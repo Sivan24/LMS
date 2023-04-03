@@ -80,13 +80,37 @@ public class LMS {
         }
 
         Book book = new Book(title, author, year);
-         bookList.addBook(book);
+        bookList.addBook(book);
     }
 
     public static void removeBook(Scanner scanner) {
-        System.out.print("Enter book title: ");
-        String title = scanner.nextLine();
-        bookList.removeBook(title);
+        System.out.println("1. Remove by title: ");
+        System.out.println("2. Remove by author: ");
+        System.out.print("Enter your choice: ");
+
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+        switch (choice) {
+            case 1:
+                System.out.print("Enter book title: ");
+                String title = scanner.nextLine();
+                bookList.findBookByTitle(title);
+                break;
+            case 2:
+                System.out.print("Enter book author: ");
+                String author = scanner.nextLine();
+        }
+
+
+
+
+
+        //String title = scanner.nextLine();
+        //bookList.removeBook(title);
+    }
+
+    public static void removeBookByTitle(String title) {
+
     }
 
     public static void listBooks() {
@@ -109,7 +133,7 @@ public class LMS {
             case 2:
                 System.out.print("Enter book author: ");
                 String author = scanner.nextLine();
-            bookList.findBookByAuthor(author);
+                bookList.findBookByAuthor(author);
                 break;
             default:
                 System.out.println("Invalid choice!");

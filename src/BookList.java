@@ -10,6 +10,10 @@ public class BookList {
         loadFromFile();
     }
 
+    public boolean isEmpty() {
+        return head == null;
+    }
+
     public void loadBook(Book book) {
         if (head == null) {
             head = new BookNode(book);
@@ -20,7 +24,6 @@ public class BookList {
             }
             current.setNext(new BookNode(book));
         }
-        saveToFile();
     }
 
     public void addBook(Book book) {
@@ -63,6 +66,34 @@ public class BookList {
         }
     }
 
+    public void removeByTitle(String title) {
+        int count = 0;
+        BookNode current = head;
+        BookNode first;
+        while (current != null ) {
+            if (current.getBook().getTitle().equals(title)) {
+                count++;
+            }
+            if (count == 1) {
+                first = current;
+            }
+            current = current.getNext();
+        }
+        if (count == 1) {
+        }
+    }
+
+    public void removeBook(String title, String author) {
+        BookNode current = head;
+        while (current != null ) {
+            if ((current.getBook().getTitle().equals(title))
+                    && (current.getBook().getAuthor().equals(author))) {
+                System.out.println(current.getBook().toString());
+            }
+            current = current.getNext();
+        }
+    }
+
     public void listBooks() {
         BookNode current = head;
         while (current != null) {
@@ -98,10 +129,6 @@ public class BookList {
         if (!flag) {
             System.out.println("There is no book by " + author + " in the library.");
         }
-    }
-
-    public boolean isEmpty() {
-        return head == null;
     }
 
     private void loadFromFile() {
