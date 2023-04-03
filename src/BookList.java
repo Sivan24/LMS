@@ -46,51 +46,109 @@ public class BookList {
         saveToFile();
     }
 
-    public void removeBook(String title) {
-        if (head.getBook().getTitle().equals(title)) {
+    public int countByTitle(String title) {
+        int count = 0;
+        BookNode current = head;
+        while (current != null ) {
+            if (current.getBook().getTitle().equals(title)) {
+                count++;
+            }
+            current = current.getNext();
+        }
+        return count;
+    }
+    public int countByAuthor(String author) {
+        int count = 0;
+        BookNode current = head;
+        while (current != null ) {
+            if (current.getBook().getAuthor().equals(author)) {
+                count++;
+            }
+            current = current.getNext();
+        }
+        return count;
+    }
+
+    public void deleteByTitle(String title) {
+        int count = countByTitle(title);
+        if (count <= 1) {
+            if (head.getBook().getTitle().equals(title)) {
+                head = head.getNext();
+                saveToFile();
+                System.out.println(title + " has been deleted.");
+                return;
+            }
+            BookNode current = head;
+            while (current.getNext() != null && !current.getNext().getBook().getTitle().equals(title)) {
+                current = current.getNext();
+            }
+            if (current.getNext() != null) {
+                current.setNext(current.getNext().getNext());
+                saveToFile();
+                System.out.println(title + " has been deleted.");
+            } else {
+                System.out.println("There is no " + title + " in the library.");
+            }
+        } else {
+            System.out.println("There are many books titled" + title + " in the library, which author's books do you want to delete?");
+            findBookByTitle(title);
+            System.out.print("Enter the author: ");
+            Scanner scanner = new Scanner(System.in);
+            String author = scanner.nextLine();
+            deleteBook(title, author);
+        }
+    }
+
+    public void deleteByAuthor(String author) {
+        int count = countByAuthor(author);
+        if (count <= 1) {
+            if (head.getBook().getAuthor().equals(author)) {
+                head = head.getNext();
+                saveToFile();
+                System.out.println("The book by author " + author + " has been deleted.");
+                return;
+            }
+            BookNode current = head;
+            while (current.getNext() != null && !current.getNext().getBook().getAuthor().equals(author)) {
+                current = current.getNext();
+            }
+            if (current.getNext() != null) {
+                current.setNext(current.getNext().getNext());
+                saveToFile();
+                System.out.println("The book by author" + author + " has been deleted.");
+            } else {
+                System.out.println("There is no " + author + " in the library.");
+            }
+        } else {
+            System.out.println("There are many books written by " + author + " in the library, which one do you want to delete?");
+            findBookByAuthor(author);
+            System.out.print("Enter the title: ");
+            Scanner scanner = new Scanner(System.in);
+            String title = scanner.nextLine();
+            deleteBook(title, author);
+        }
+    }
+
+    public void deleteBook(String title, String author) {
+        if ((head.getBook().getTitle().equals(title))
+                && (head.getBook().getAuthor().equals(author))) {
             head = head.getNext();
             saveToFile();
-            System.out.println(title + " has been removed.");
+            System.out.println("The book titled " + title + ", written by the author " + author + ", has been deleted.");
             return;
         }
         BookNode current = head;
-        while (current.getNext() != null && !current.getNext().getBook().getTitle().equals(title)) {
+        while ((current.getNext() != null)
+                && (!current.getNext().getBook().getTitle().equals(title))
+                &&(!current.getNext().getBook().getTitle().equals(author))) {
             current = current.getNext();
         }
         if (current.getNext() != null) {
             current.setNext(current.getNext().getNext());
             saveToFile();
-            System.out.println(title + " has been removed.");
+            System.out.println("The book titled " + title + ", written by the author " + author + ", has been deleted.");
         } else {
-            System.out.println("There is no " + title + " in the library.");
-        }
-    }
-
-    public void removeByTitle(String title) {
-        int count = 0;
-        BookNode current = head;
-        BookNode first;
-        while (current != null ) {
-            if (current.getBook().getTitle().equals(title)) {
-                count++;
-            }
-            if (count == 1) {
-                first = current;
-            }
-            current = current.getNext();
-        }
-        if (count == 1) {
-        }
-    }
-
-    public void removeBook(String title, String author) {
-        BookNode current = head;
-        while (current != null ) {
-            if ((current.getBook().getTitle().equals(title))
-                    && (current.getBook().getAuthor().equals(author))) {
-                System.out.println(current.getBook().toString());
-            }
-            current = current.getNext();
+            System.out.println("There are no books titled " + title + ", written by the author " + author + ", in the library.");
         }
     }
 

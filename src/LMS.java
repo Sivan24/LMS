@@ -10,7 +10,7 @@ public class LMS {
         while (true) {
             System.out.println();
             System.out.println("1. Add book");
-            System.out.println("2. Remove book");
+            System.out.println("2. Delete book");
             System.out.println("3. List books");
             System.out.println("4. Find book");
             System.out.println("0. Quit");
@@ -28,7 +28,7 @@ public class LMS {
                         System.out.println("The library is empty.");
                         break;
                     }
-                    removeBook(scanner);
+                    deleteBook(scanner);
                     break;
                 case 3:
                     if (bookList.isEmpty()) {
@@ -83,9 +83,9 @@ public class LMS {
         bookList.addBook(book);
     }
 
-    public static void removeBook(Scanner scanner) {
-        System.out.println("1. Remove by title: ");
-        System.out.println("2. Remove by author: ");
+    public static void deleteBook(Scanner scanner) {
+        System.out.println("1. Delete by title: ");
+        System.out.println("2. Delete by author: ");
         System.out.print("Enter your choice: ");
 
         int choice = scanner.nextInt();
@@ -94,23 +94,16 @@ public class LMS {
             case 1:
                 System.out.print("Enter book title: ");
                 String title = scanner.nextLine();
-                bookList.findBookByTitle(title);
+                bookList.deleteByTitle(title);
                 break;
             case 2:
                 System.out.print("Enter book author: ");
                 String author = scanner.nextLine();
+                bookList.deleteByAuthor(author);
+                break;
+            default:
+                System.out.println("Invalid choice!");
         }
-
-
-
-
-
-        //String title = scanner.nextLine();
-        //bookList.removeBook(title);
-    }
-
-    public static void removeBookByTitle(String title) {
-
     }
 
     public static void listBooks() {
