@@ -4,12 +4,12 @@ public class LMS {
     static BookList bookList = new BookList("books.csv");
 
     public static void main(String[] args) {
-
+        System.out.println();
+        System.out.println("Welcome to the Library Management System (supported by Sivan)");
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
             System.out.println();
-            System.out.println("Welcome to the Library Management System (supported by Sivan)");
             System.out.println("1. Add book");
             System.out.println("2. Delete book");
             System.out.println("3. List books");
