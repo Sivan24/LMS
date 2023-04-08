@@ -174,6 +174,7 @@ public class BookList {
             System.out.println(title + " is not in the library.");
         }
     }
+
     public void findBookByAuthor(String author) {
         boolean flag = false;
         BookNode current = head;

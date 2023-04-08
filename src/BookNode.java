@@ -18,4 +18,5 @@ public class BookNode {
     public void setNext(BookNode next) {
         this.next = next;
     }
+
 }

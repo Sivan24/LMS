@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class LMS {
@@ -5,7 +6,7 @@ public class LMS {
 
     public static void main(String[] args) {
         System.out.println();
-        System.out.println("Welcome to the Library Management System (supported by Sivan)");
+        System.out.print("Welcome to the Library Management System (supported by Sivan)");
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
@@ -17,7 +18,19 @@ public class LMS {
             System.out.println("0. Quit");
             System.out.print("Enter your choice: ");
 
-            int choice = scanner.nextInt();
+            int input = 0;
+            boolean isValidInput = false;
+            while(!isValidInput) {
+                try {
+                    input = scanner.nextInt();
+                    isValidInput = true;
+                } catch(InputMismatchException e) {
+                    System.out.println("Input error, please enter an integer again.");
+                    scanner.nextLine();
+                }
+            }
+
+            int choice = input;
             scanner.nextLine();
 
             switch (choice) {
@@ -89,7 +102,19 @@ public class LMS {
         System.out.println("2. Delete by author: ");
         System.out.print("Enter your choice: ");
 
-        int choice = scanner.nextInt();
+        int input = 0;
+        boolean isValidInput = false;
+        while(!isValidInput) {
+            try {
+                input = scanner.nextInt();
+                isValidInput = true;
+            } catch(InputMismatchException e) {
+                System.out.println("Input error, please enter an integer again.");
+                scanner.nextLine();
+            }
+        }
+
+        int choice = input;
         scanner.nextLine();
         switch (choice) {
             case 1:
@@ -116,7 +141,19 @@ public class LMS {
         System.out.println("2. Enter book author: ");
         System.out.print("Enter your choice: ");
 
-        int choice = scanner.nextInt();
+        int input = 0;
+        boolean isValidInput = false;
+        while(!isValidInput) {
+            try {
+                input = scanner.nextInt();
+                isValidInput = true;
+            } catch(InputMismatchException e) {
+                System.out.println("Input error, please enter an integer again.");
+                scanner.nextLine();
+            }
+        }
+
+        int choice = input;
         scanner.nextLine();
         switch (choice) {
             case 1:
