@@ -115,7 +115,7 @@ public class BookList {
             if (current.getNext() != null) {
                 current.setNext(current.getNext().getNext());
                 saveToFile();
-                System.out.println("The book by author" + author + " has been deleted.");
+                System.out.println("The book by author " + author + " has been deleted.");
             } else {
                 System.out.println("There is no " + author + " in the library.");
             }
@@ -137,17 +137,21 @@ public class BookList {
             System.out.println("The book titled " + title + ", written by the author " + author + ", has been deleted.");
             return;
         }
-        BookNode current = head;
-        while ((current.getNext() != null)
-                && (!current.getNext().getBook().getTitle().equals(title))
-                &&(!current.getNext().getBook().getTitle().equals(author))) {
-            current = current.getNext();
+
+        BookNode prev = head;
+        boolean flg = false;
+        while (prev.getNext() != null) {
+            if ((prev.getNext().getBook().getTitle().equals(title))
+                    && (prev.getNext().getBook().getAuthor().equals(author))) {
+                prev.setNext(prev.getNext().getNext());
+                saveToFile();
+                flg =true;
+                System.out.println("The book titled " + title + ", written by the author " + author + ", has been deleted.");
+                break;
+            }
+            prev = prev.getNext();
         }
-        if (current.getNext() != null) {
-            current.setNext(current.getNext().getNext());
-            saveToFile();
-            System.out.println("The book titled " + title + ", written by the author " + author + ", has been deleted.");
-        } else {
+        if (!flg) {
             System.out.println("There are no books titled " + title + ", written by the author " + author + ", in the library.");
         }
     }
